@@ -1,4 +1,4 @@
-# Djangopracticalguide
+# Djangopracticalguide udemy course.
 steps to install and create a new project in Django VS code
 First create a folder
 created a folder in Downloads > Djangofiles>monthly_learning_plan  *-- monthly_learning_plan name of folder. 
