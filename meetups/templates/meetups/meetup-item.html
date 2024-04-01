@@ -1,0 +1,22 @@
+<li class = "meetup-item">
+    <article>
+        <div class = "meetup-summary">
+            <div class = "meetup-image">
+               <img src="{{ meetup_item.image }}" alt="{{ title }}">
+               {% comment %} giving the image uploaded in database/admin {% endcomment %}
+               {% comment %} image or title are variables in models.py Meetup class {% endcomment %}
+            </div>
+             <div class = "meetup-details">
+                <h3> {{ meetup_item.title }} </h3>
+                <address>{{ meetup_item.location }}</address>
+
+             </div>
+        </div>
+        <div class = "meetup-actions">
+            <a href = "{% url 'meetup-detail' slug %}" class = "btn">MoreDetails</a>                                    
+            {% comment %} <a href="/meetups/{{ meetup_item.slug }}" class="btn">MoreDetails</a> This is a manual url is automatic {% endcomment %}
+            {% comment %} meetup_item.slug meetup_item is value in for loop slug is in app urls.py {% endcomment %}
+        </div>
+    </article>
+
+</li>

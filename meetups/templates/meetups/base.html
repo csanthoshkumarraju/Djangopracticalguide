@@ -1,0 +1,47 @@
+{% comment %} Need to link this html file in views.py file {% endcomment %}
+{% load static %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        {% comment %}  after block name 'title/mainheading/headercontent is used from index.html' {% endcomment %}
+        <title>{% block title %}
+                    My meetups
+               {% endblock  %}</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="{% static 'meetups/styles/base.css' %}"> 
+        {% block site_css %}{% endblock site_css %}
+        <link rel="stylesheet" href="{% static 'meetups/styles/all_meetups.css' %}">
+        {% comment %} link connects/link the html and css files {% endcomment %}
+    </head>
+    <body>
+        <header id="main-header">
+            <nav><a href = "/meetups" id="main-logo">DjangoMeetups</a></nav>
+            <h1>{% block main_heading %}{% endblock main_heading %}</h1>
+            {% block header_content %}{% endblock header_content %}
+        </header>
+        <main>
+            {% block body %}{% endblock body %}
+        </main>
+
+    </body>
+    
+    {% comment %} <body> {% endcomment %}
+        {% comment %} <h1>All Meetups!</h1>
+        <p>Hello World!</p>
+        {% if show_meetups %} 
+            {% for meetup_item in meetups %}
+                <p>{{ meetup_item.title }}</p>
+            {% endfor %} {% endcomment %}
+            {% comment %} <h2>{{ meetups.0.title }}</h2>  {% endcomment %}
+        {% comment %} {% else %}
+            <p>No Meetups found</p>
+        {% endif %} {% endcomment %}
+        {% comment %} 'show_meetups' is a key in views.py index function render line {% endcomment %}
+        
+        {% comment %} meetups is a variable created in views.py in index function. and created a key in render. That key is used here.  {% endcomment %}
+    {% comment %} </body> {% endcomment %}
+
+</html>

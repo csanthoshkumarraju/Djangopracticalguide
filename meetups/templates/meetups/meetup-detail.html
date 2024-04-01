@@ -1,0 +1,75 @@
+{% extends "meetups/base.html" %}
+{% load static %}
+{% comment %}  after block name 'title/mainheading/headercontent is used from base.html' {% endcomment %}
+{% block title %}
+{{ meetup_title }}
+{% endblock title %}
+
+{% block site_css %}
+<link rel="stylesheet" href="{% static 'meetups/styles/meetup_detail.css' %}">
+{% endblock site_css %}
+
+{% block main_heading %}
+{{ meetup_title }}
+{% endblock main_heading %}
+
+{% block body %}
+
+{% if meetup_found %}
+<article>
+    <img src= "{{ meetup_item.image.url }}" alt="{{ meetup.title }}">
+    <section id="location">
+        <h2>Meetup location</h2>
+        {% comment %} <img src= {{ meetup.image.url }} alt="{{ title }}"> {% endcomment %}
+        <address>This meetup takes place in <span><u><h3 style="color:Tomato;">{{ meetup_location }}</h3></u> <p>on <h3 style="color:DodgerBlue;"> " {{ date }} "</h3></p></span> <h2><i>Please Click the &#128071; link for maps location </i></h2><a href= "{{ meetup_address }}">{{ meetup_address }}</a> </address>
+    </section>
+    <section id = "details">
+        <h2> What's This Meetup About?</h2>
+        <p>{{ meetup_description }}</p>
+        <footer>
+            <p>Need more details? Please contact organiser. Please click link &#128073;<a href = "mailto:{{ organizer_email }}"><u>{{ organizer_email }}</u></a></p>
+        </footer>
+    </section>
+    <section id="registrations">
+        <h2>Join US!</h2>
+        <form action="{% url "meetup_detail" meetup_item.slug %}" method="POST">
+            {% csrf_token %}
+            <ul>
+               {{ form.as_ul }}
+            </ul>
+                <div id = "registration-actions">
+                    <button>Register</button>
+                </div>
+
+
+        </form>
+    </section>
+
+</article>
+{% else %}
+<p>No Meetup found for this slug, sorry!</p>
+{% endif %}
+
+{% endblock  %}
+
+
+
+
+<!DOCTYPE html>
+<html>
+    <head>
+        {% comment %} <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>{{ meetup_title }}</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1"> {% endcomment %}
+        {% comment %} <link rel="stylesheet" href="{% static 'meetups/styles/base.css' %}"> {% endcomment %}
+        
+    </head>
+    <body>
+        <main>
+            
+        </main>
+    </body>
+</html>
+

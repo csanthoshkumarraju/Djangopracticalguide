@@ -1,0 +1,93 @@
+{% extends "meetups/base.html" %}
+{% comment %} Need to link this html file in views.py file {% endcomment %}
+{% load static %}
+{% block title %}
+    My meetups
+{% endblock  %}
+{% comment %}  after block name 'title/mainheading/headercontent is useed from base.html' {% endcomment %}
+{% block site_css %}
+<link rel="stylesheet" href="{% static 'meetups/styles/all_meetups.css' %}">
+{% endblock  %}
+
+{% block main_heading %}
+We got great meetups coming up!
+{% endblock %}
+
+{% block header_content %}
+<p>Find the  one that best suits your needs!</p>
+{% endblock  %}
+
+{% block body %}
+<section>
+    <h2>Upcoming Meetups</h2>
+    <ol>
+        {% for meetup_item in meetups %}
+        {% include "meetups/meetup-item.html" with title=meetup_item.title image=meetup_item.image.url location=meetup_item.location slug=meetup_item.slug %}
+
+        {% comment %} meetups is a key in views.py index function render line {% endcomment %}
+            {% comment %} <li class = "meetup-item">
+                <article>
+                    <div class = "meetup-summary">
+                        <div class = "meetup-image">
+                           <img src="" alt="">
+                        </div>
+                         <div class = "meetup-details">
+                            <h3> {{ meetup_item.title }} </h3>
+                            <address>{{ meetup_item.location }}</address>
+
+                         </div>
+                    </div>
+                    <div class = "meetup-actions">
+                        <a href = "{% url 'meetup-detail' meetup_item.slug %}" class = "btn">MoreDetails</a>                                     {% endcomment %}
+                        {% comment %} <a href="/meetups/{{ meetup_item.slug }}" class="btn">MoreDetails</a> This is a manual url is automatic {% endcomment %}
+                        {% comment %} meetup_item.slug meetup_item is value in for loop slug is in app urls.py
+                    </div>
+                </article>
+
+            </li> {% endcomment %}
+        {% endfor %}
+    </ol>
+</section>
+
+{% endblock  %}
+
+
+<html>
+    <head>
+        {% comment %} <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge"> {% endcomment %}
+        <title>All Meetups</title>
+        {% comment %} <meta name="description" content=""> {% endcomment %}
+        {% comment %} <meta name="viewport" content="width=device-width, initial-scale=1"> {% endcomment %}
+        {% comment %} <link rel="stylesheet" href="{% static 'meetups/styles/base.css' %}">  {% endcomment %}
+        {% comment %} link connects/link the html and css files {% endcomment %}
+    </head>
+    <body>
+        <header id="main-header">
+            <nav><a href = "/meetups" id="main-logo">DjangoMeetups</a></nav>
+            <h1>We got great meetups coming up!</h1>
+            <p>Find the  one that best suits your needs!</p>
+        </header>
+        <main>
+            
+        </main>
+
+    </body>
+    
+    {% comment %} <body> {% endcomment %}
+        {% comment %} <h1>All Meetups!</h1>
+        <p>Hello World!</p>
+        {% if show_meetups %} 
+            {% for meetup_item in meetups %}
+                <p>{{ meetup_item.title }}</p>
+            {% endfor %} {% endcomment %}
+            {% comment %} <h2>{{ meetups.0.title }}</h2>  {% endcomment %}
+        {% comment %} {% else %}
+            <p>No Meetups found</p>
+        {% endif %} {% endcomment %}
+        {% comment %} 'show_meetups' is a key in views.py index function render line {% endcomment %}
+        
+        {% comment %} meetups is a variable created in views.py in index function. and created a key in render. That key is used here.  {% endcomment %}
+    {% comment %} </body> {% endcomment %}
+
+</html>
